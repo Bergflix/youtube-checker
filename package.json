@@ -1,0 +1,26 @@
+{
+  "name": "youtube-checker",
+  "version": "1.0.0",
+  "description": "Waits for a video upload and sends a discord message",
+  "main": "index.js",
+  "scripts": {
+    "start": "node $npm_package_main",
+    "test": "nodemon $npm_package_main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bergflix/youtube-checker.git"
+  },
+  "author": "RyanFlm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Bergflix/youtube-checker/issues"
+  },
+  "homepage": "https://github.com/Bergflix/youtube-checker#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.0.5"
+  }
+}
