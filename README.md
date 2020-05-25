@@ -4,10 +4,12 @@ Waits for a video upload and sends a discord message
 ## Requirements
 - Have a YouTube Data API v3 Key
 - Have a Discord Webhook-Token
+- At least Node.js v12 installed 
 
 ## Installation
-Clone this Repository into the destination folder with\
+Clone this Repository into the destination folder with
 `git clone https://Bergflix/youtube-checker.git`
+and install all dependencies with `npm install`
 
 ## Configuration
 Define your specific settings in the `config.json` File
