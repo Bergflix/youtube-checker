@@ -1,8 +1,13 @@
 const axios = require("axios");
+const {google} = require("googleapis");
+
 const config = require("./config.json");
-const ytApiKey = process.env.API_TOKEN || config.ytApiKey;
-const discordWebhookToken = process.env.WEBHOOK_TOKEN || config.discordWebhookToken;
 const videos = {new: [], old: []};
+const youtube = google.youtube({
+    version: "v3",
+    auth: process.env.API_TOKEN || config.ytApiKey
+});
+
 
 function listen(timeout = 5){
     (async function loop(){
@@ -20,27 +25,28 @@ function listen(timeout = 5){
                 }
             }
         }catch(e){
-            console.error("Error", e);
+            console.error("Error", e.message);
         }
         setTimeout(loop, 1000 * 60 * timeout);
     })();
 }
-function loadVideos(){
-    return new Promise((resolve, reject) => {
-        axios.get(`https://www.googleapis.com/youtube/v3/search?key=${ytApiKey}&channelId=${config.channelId}&part=snippet,id&order=date&maxResults=5`).then(data => {
-            data = data.data;
-            if(!data.items) return;
-
-            let videos = [];
-            data.items.forEach(item => {
-                videos.push(item.id.videoId);
-            });
-            resolve(videos);
-        }).catch(e => reject(e));
+async function loadVideos(){
+    let res = await youtube.videos.list({
+        channelId: config.channelId,
+        part: "snippet,id",
+        order: "date",
+        maxResults: 5
     });
+    if(!res.data.items) return;
+
+    let videos = [];
+    res.data.items.forEach(item => {
+        videos.push(item.id.videoId);
+    });
+    return videos;
 }
 function sendToDiscord(videoId) {
-    return axios.post(`https://discordapp.com/api/webhooks/${config.discordChannel}/${discordWebhookToken}`, {
+    return axios.post(`https://discordapp.com/api/webhooks/${config.discordChannel}/${process.env.WEBHOOK_TOKEN || config.discordWebhookToken}`, {
         "username": "YouTube",
         "avatar_url": "https://share.bergflix.de/icons/webhook.png",
         "embeds": [{
