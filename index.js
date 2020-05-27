@@ -31,7 +31,7 @@ function listen(timeout = 5){
     })();
 }
 async function loadVideos(){
-    let res = await youtube.videos.list({
+    let res = await youtube.search.list({
         channelId: config.channelId,
         part: "snippet,id",
         order: "date",
