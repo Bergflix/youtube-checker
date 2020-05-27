@@ -48,7 +48,7 @@ async function loadVideos(){
 function sendToDiscord(videoId) {
     return axios.post(`https://discordapp.com/api/webhooks/${config.discordChannel}/${process.env.WEBHOOK_TOKEN || config.discordWebhookToken}`, {
         "username": "YouTube",
-        "avatar_url": "https://share.bergflix.de/icons/webhook.png",
+        "avatar_url": "https://share.bergflix.de/logo/light.png",
         "embeds": [{
             "title": "YouTube Check",
             "description": `Es gibt ein neues Video von HerrBergmann auf [YouTube](https://youtu.be/${videoId}).\n`
@@ -58,5 +58,5 @@ function sendToDiscord(videoId) {
     });
 }
 
-listen(3);
+listen(30);
 console.log("Now listening on youtube uploads");
