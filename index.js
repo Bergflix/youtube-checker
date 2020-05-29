@@ -16,13 +16,13 @@ function listen(timeout = 5){
             if (!videos.old.length) {
                 videos.old = videos.new;
             }
-            if (videos.old !== videos.new) {
-                let diff = videos.new.filter(id => !videos.old.includes(id));
-                for (let i = diff.length - 1; i >= 0; i--) {
-                    let videoId = diff[i];
-                    await sendToDiscord(videoId);
-                    videos.old.push(videoId);
-                }
+
+            let diff = videos.new.filter(id => !videos.old.includes(id));
+            for (let i = diff.length - 1; i >= 0; i--) {
+                console.log("New video: "+diff[i]);
+                let videoId = diff[i];
+                await sendToDiscord(videoId);
+                videos.old.push(videoId);
             }
         }catch(e){
             console.error("Error", e.message);
@@ -46,6 +46,7 @@ async function loadVideos(){
     return videos;
 }
 function sendToDiscord(videoId) {
+    console.log("Sent to Discord");
     return axios.post(`https://discordapp.com/api/webhooks/${config.discordChannel}/${process.env.WEBHOOK_TOKEN || config.discordWebhookToken}`, {
         "username": "YouTube",
         "avatar_url": "https://share.bergflix.de/logo/light.png",
