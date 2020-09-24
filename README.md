@@ -8,13 +8,13 @@ Waits for a video upload and sends a discord message
 
 ## Installation
 Clone this Repository into the destination folder with
-`git clone https://Bergflix/youtube-checker.git`
+`git clone https://github.com/Bergflix/youtube-checker.git`
 and install all dependencies with `npm install`
 
 ## Configuration
 Define your specific settings in the `config.json` File
 - channelId - The YouTube-Channel ID 
-- ytAPiKey - The Auth Key for the YouTube Data API v3
+- ytAPIKey - The Auth Key for the YouTube Data API v3
 - discordChannel - The ID of the Discord-Channel to which this script sends the notification
 - discordWebhookToken - The Token for the Discord-Webhook
 
