@@ -49,7 +49,7 @@ function sendToDiscord(videoId) {
     console.log("Sent to Discord");
     return axios.post(`https://discordapp.com/api/webhooks/${config.discordChannel}/${process.env.WEBHOOK_TOKEN || config.discordWebhookToken}`, {
         "username": "YouTube",
-        "avatar_url": "https://share.bergflix.de/logo/light.png",
+        "avatar_url": "https://cdn.bergflix.de/logo/light.png",
         "embeds": [{
             "title": "YouTube Check",
             "description": `Es gibt ein neues Video von HerrBergmann auf [YouTube](https://youtu.be/${videoId}).\n`
